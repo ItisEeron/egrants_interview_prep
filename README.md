@@ -122,9 +122,15 @@ published to GitHub Pages at `https://<user>.github.io/egrants_interview_prep/`.
 3. **Authentication → Sign-in method** — enable **Google**.
 4. **Firestore Database → Create database** — start in production mode.
 5. **Firestore → Rules** — paste in `firestore.rules` and publish. This step is
-   what protects your data; do not skip it.
+   what protects your data; do not skip it. See *Keeping the rules honest* below
+   for how to stop doing this by hand.
 6. **Authentication → Settings → Authorized domains** — add
    `<user>.github.io`, or sign-in will be rejected from the deployed site.
+
+Steps 3 and 6 have to happen in the console. Enabling Google sign-in makes
+Firebase provision an OAuth client for you; driving that through the Identity
+Toolkit API instead means supplying your own client id and secret, which is more
+work than clicking the toggle.
 
 ### 2. GitHub
 
@@ -150,6 +156,44 @@ published to GitHub Pages at `https://<user>.github.io/egrants_interview_prep/`.
 
 If the variables are missing the build still succeeds — the deployed site just
 falls back to localStorage, with progress per-browser and no sign-in.
+
+### Keeping the rules honest
+
+Publishing rules by pasting them into the console leaves two copies: the one in
+this repo and the one actually being enforced. They drift, and the way you find
+out is that something turns out to be readable which should not have been.
+
+`.github/workflows/firestore-rules.yml` publishes `firestore.rules` on every push
+that touches it, so the repo copy is the only copy. To turn it on:
+
+1. In the Google Cloud console for the project, **IAM & Admin → Service
+   Accounts** — create one and grant it **Firebase Rules Admin**
+   (`roles/firebaserules.admin`). That is the whole permission it needs.
+2. Give it a **JSON key** and download it.
+3. In GitHub, **Settings → Secrets and variables → Actions → Secrets** — add the
+   file's entire contents as `FIREBASE_SERVICE_ACCOUNT`.
+
+A secret this time, not a variable: a service account key is a real credential,
+unlike the web config.
+
+Prefer a service account over `firebase login` for this. A personal login can
+reach every Firebase project on your Google account; a service account scoped to
+one project with one role can publish these rules and nothing else.
+
+Until the secret exists the workflow logs that it is skipping and passes, so
+nothing breaks if you would rather keep using the console.
+
+To deploy rules from your own machine instead:
+
+```bash
+npm install -g firebase-tools   # the CLI must be v7 or newer
+firebase login
+firebase use <your-project-id>
+firebase deploy --only firestore:rules
+```
+
+`.firebaserc`, which `firebase use` writes, is gitignored — it names your
+project, which is yours rather than the repo's.
 
 ### Notes on the two Pages quirks
 

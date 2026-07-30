@@ -1,0 +1,41 @@
+name: Publish Firestore rules
+
+# Keeps the live rules equal to firestore.rules in this repo.
+#
+# Pasting rules into the Firebase console instead leaves two sources of truth,
+# and the repo copy drifts from what is actually enforced — which you find out
+# about when something turns out to be readable that should not be.
+on:
+  push:
+    branches: [main]
+    paths:
+      - firestore.rules
+      - firebase.json
+      - .github/workflows/firestore-rules.yml
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish rules
+        env:
+          # A service account JSON key, scoped to this one project. Not a
+          # personal login: `firebase login` would hand over every project on
+          # the account, where this reaches exactly one.
+          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          PROJECT: ${{ vars.VITE_FIREBASE_PROJECT_ID }}
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/service-account.json
+        run: |
+          if [ -z "$SERVICE_ACCOUNT" ] || [ -z "$PROJECT" ]; then
+            echo "No FIREBASE_SERVICE_ACCOUNT secret or VITE_FIREBASE_PROJECT_ID variable set."
+            echo "Skipping — publish rules from the Firebase console instead."
+            exit 0
+          fi
+          printf '%s' "$SERVICE_ACCOUNT" > "$GOOGLE_APPLICATION_CREDENTIALS"
+          npx --yes firebase-tools@latest deploy \
+            --only firestore:rules \
+            --project "$PROJECT" \
+            --non-interactive

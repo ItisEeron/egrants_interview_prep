@@ -5,3 +5,11 @@ dist/
 .env.*.local
 .DS_Store
 *.log
+
+# Written by `firebase use` — names your project, so it stays local.
+.firebaserc
+
+# Service account keys. Never commit these.
+*serviceaccount*.json
+*service-account*.json
+
