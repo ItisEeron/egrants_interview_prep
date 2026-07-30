@@ -6,13 +6,14 @@ import { ProblemNotes } from './ProblemNotes.jsx';
 import { useProblemProgress, useProgress } from '../../hooks/useProgress.js';
 import styles from './ProblemRow.module.css';
 
+/**
+ * The slug is stored with each problem rather than derived from its title.
+ * The workbook abbreviates titles — "Validate BST" for what LeetCode calls
+ * "Validate Binary Search Tree" — so deriving the slug pointed nine of the
+ * fifty-two problems at pages that do not exist.
+ */
 function leetcodeUrl(problem) {
-  const slug = problem.title
-    .toLowerCase()
-    .replace(/[^a-z0-9 ]/g, '')
-    .trim()
-    .replace(/\s+/g, '-');
-  return `https://leetcode.com/problems/${slug}/`;
+  return `https://leetcode.com/problems/${problem.slug}/`;
 }
 
 export function ProblemRow({ problem }) {
