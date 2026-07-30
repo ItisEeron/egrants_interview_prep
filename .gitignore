@@ -13,3 +13,6 @@ dist/
 *serviceaccount*.json
 *service-account*.json
 
+
+# Local Claude Code permissions, specific to one machine.
+.claude/settings.local.json
