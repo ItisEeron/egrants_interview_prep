@@ -1,0 +1,15 @@
+rules_version = '2';
+
+// Progress lives at users/{uid}, one document per account.
+//
+// This is the only thing standing between your notes and the internet: the
+// Firebase config in the client bundle is public, so these rules — not the
+// config — are what keep other people out. Nothing is readable or writable
+// without being signed in as the owner of the document.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

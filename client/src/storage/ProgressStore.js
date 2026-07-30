@@ -1,12 +1,15 @@
 /**
- * The contract every storage backend must satisfy.
+ * The contract every progress backend must satisfy.
  *
- * Adding a new backend means writing a module that exports these two functions.
+ * Adding a new backend means writing a module that exports these functions.
  * Nothing outside the `storage/` folder should know which backend is in use.
  *
- * @typedef {Object} StorageAdapter
+ * `read()` resolves to `null` when nothing has been stored yet — the caller
+ * seeds the first document, so every backend gets the same first-run behaviour.
+ *
+ * @typedef {Object} ProgressStore
  * @property {string} name
- * @property {() => Promise<ProgressDocument>} read
+ * @property {() => Promise<ProgressDocument|null>} read
  * @property {(document: ProgressDocument) => Promise<ProgressDocument>} write
  */
 
@@ -14,7 +17,7 @@
  * @typedef {Object} ProgressDocument
  * @property {Record<string, ProblemProgress>} problems
  * @property {Record<string, ChapterProgress>} designChapters
- * @property {Record<string, Record<string, boolean>>} weeklyChecklists  keyed by weekId, then checklist item id
+ * @property {Record<string, Record<string, boolean>>} weeklyChecklists  keyed by weekId, then item id
  * @property {Record<string, boolean>} finalChecklist
  */
 
@@ -38,3 +41,12 @@ export const EMPTY_DOCUMENT = {
   weeklyChecklists: {},
   finalChecklist: {},
 };
+
+/**
+ * Fills in any top-level key a stored document is missing, so code downstream
+ * can read `document.problems` without guarding. Guards against a document
+ * written by an older version of the app.
+ */
+export function normalizeDocument(raw) {
+  return { ...structuredClone(EMPTY_DOCUMENT), ...(raw ?? {}) };
+}

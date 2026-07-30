@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .env
-server/data/progress.json
+.env.local
+.env.*.local
 .DS_Store
 *.log

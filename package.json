@@ -3,18 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "description": "Interview preparation tracker for the Senior Engineer coding and system design workbooks.",
-  "workspaces": ["server", "client"],
+  "workspaces": ["client"],
   "engines": {
-    "node": ">=18"
+    "node": ">=20.19"
   },
   "scripts": {
-    "dev": "concurrently -n server,client -c blue,magenta \"npm run dev -w server\" \"npm run dev -w client\"",
-    "dev:server": "npm run dev -w server",
-    "dev:client": "npm run dev -w client",
+    "dev": "npm run dev -w client",
     "build": "npm run build -w client",
-    "start": "npm run start -w server"
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.0"
+    "preview": "npm run preview -w client"
   }
 }

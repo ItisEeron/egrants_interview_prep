@@ -2,7 +2,31 @@
   "permissions": {
     "allow": [
       "Bash(npm -v)",
-      "Bash(git --version)"
+      "Bash(git --version)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(npm audit *)",
+      "Bash(echo \"--- exit: $? \\(1 = no matches, good\\) ---\")",
+      "Bash(curl -s -o /dev/null -w \"index: %{http_code}\\\\n\" http://localhost:5173/)",
+      "Bash(curl -s http://localhost:5173/src/main.jsx)",
+      "Bash(lsof -ti:5173 -ti:5174)",
+      "Bash(xargs kill -9)",
+      "Bash(pkill -f \"vite\")",
+      "Bash(pkill -f \"node --watch\")",
+      "Bash(lsof -i:5173 -i:4000 -i:5174)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/)",
+      "Bash(curl -s http://localhost:5173/src/App.jsx)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/weeks/w-1)",
+      "Read(//Users/eerongrant/.cache/**)",
+      "Read(//Users/eerongrant/Library/Caches/**)",
+      "Bash(command -v playwright chromium google-chrome)",
+      "Read(//Applications/Google Chrome.app/Contents/MacOS/**)",
+      "Bash(npm ls *)",
+      "Bash(pkill -f \"Google Chrome\")",
+      "Bash(pkill -f vite)",
+      "Bash(git add *)",
+      "Bash(git -c 'user.name=Eeron Grant' -c user.email=eerongrant@gmail.com commit -q -m ' *)",
+      "Bash(git -c user.name=\"Eeron Grant\" -c user.email=\"eerongrant@gmail.com\" commit -q -F /tmp/commitmsg.txt)"
     ]
   }
 }

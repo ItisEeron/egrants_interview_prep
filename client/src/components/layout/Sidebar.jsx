@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useCurriculum } from '../../hooks/useCurriculum.js';
+import { AccountFooter } from '../auth/AccountFooter.jsx';
 import styles from './Sidebar.module.css';
 
 function linkClass({ isActive }) {
@@ -35,6 +36,8 @@ export function Sidebar() {
           {chapter.title.replace(/^Design (a |the )?/, '')}
         </NavLink>
       ))}
+
+      <AccountFooter />
     </nav>
   );
 }
