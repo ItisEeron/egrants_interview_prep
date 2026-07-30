@@ -1,0 +1,83 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.summary {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.progressLabel {
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.chapterList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chapterLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.chapterLink:hover {
+  border-color: var(--accent);
+}
+
+.chapterNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  background: var(--surface-raised);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.chapterTitle {
+  display: block;
+  font-weight: 500;
+}
+
+.chapterConcepts {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+}

@@ -1,0 +1,38 @@
+{
+  "problems": {
+    "p-1": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "" },
+    "p-217": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" },
+    "p-242": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" },
+    "p-125": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "Needed to look up fast way to remove characters in string." },
+    "p-121": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "Took too long." },
+    "p-3": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" },
+    "p-238": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" },
+    "p-347": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "Needed help with compare methods." },
+    "p-15": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "Keep studying. Needed to find solution and still struggled with implementation." },
+    "p-76": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "Solved it and got it in optimal time but still should review as it took 45 min to complete." },
+
+    "p-20": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "This should take you 5 minutes to solve." },
+    "p-155": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" },
+    "p-206": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" },
+    "p-21": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "Forgot to iterate by updating prev pointer." },
+    "p-141": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" },
+    "p-19": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" },
+    "p-143": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "" },
+    "p-2": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "Took too long." },
+    "p-704": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" },
+    "p-33": { "solved": false, "reviewed": false, "confidence": "medium", "notes": "Took too long and had to think of edge cases. Also implemented improperly and needed to look up solution." },
+    "p-153": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "Took too long. Need to practice breaking from indices." },
+    "p-875": { "solved": true, "reviewed": true, "confidence": "low", "notes": "I needed to look up the solution. Then I struggled with floating point division. I was able to understand the brute force method easily." },
+    "p-981": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "Took too long and needed to do a good amount of logging for solution. No need for lookup at least." },
+    "p-146": { "solved": true, "reviewed": true, "confidence": "low", "notes": "I understood conceptually what needed to be completed but failed to implement the changes. Hint: focus on creating smaller methods that complete what is needed." },
+
+    "p-226": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" },
+    "p-104": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" },
+    "p-98": { "solved": true, "reviewed": true, "confidence": "low", "notes": "Need to review as I needed to put code in AI. I mixed up max and minimums despite having the correct approach." },
+    "p-230": { "solved": true, "reviewed": true, "confidence": "medium", "notes": "Took too long at my current level. Used BST DFS traversal to get O(n) time complexity." },
+    "p-102": { "solved": true, "reviewed": true, "confidence": "high", "notes": "" }
+  },
+  "designChapters": {},
+  "weeklyChecklists": {},
+  "finalChecklist": {}
+}

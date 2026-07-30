@@ -1,0 +1,36 @@
+.wrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.table th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 0 10px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.table td {
+  padding: 10px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.narrow {
+  width: 1%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.table th.narrow {
+  text-align: center;
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "week-1",
+    "number": 1,
+    "title": "Core Data Structures",
+    "summary": "Hash maps, two pointers, sliding windows, and prefix/suffix tricks.",
+    "problems": [
+      { "id": "p-1", "order": 1, "leetcodeId": 1, "title": "Two Sum", "difficulty": "Easy", "pattern": "Hash Map", "importance": 5, "mustSolve": true },
+      { "id": "p-217", "order": 2, "leetcodeId": 217, "title": "Contains Duplicate", "difficulty": "Easy", "pattern": "Hash Set", "importance": 4, "mustSolve": false },
+      { "id": "p-242", "order": 3, "leetcodeId": 242, "title": "Valid Anagram", "difficulty": "Easy", "pattern": "Hash Map", "importance": 4, "mustSolve": false },
+      { "id": "p-125", "order": 4, "leetcodeId": 125, "title": "Valid Palindrome", "difficulty": "Easy", "pattern": "Two Pointers", "importance": 4, "mustSolve": false },
+      { "id": "p-121", "order": 5, "leetcodeId": 121, "title": "Best Time to Buy and Sell Stock", "difficulty": "Easy", "pattern": "Sliding Window", "importance": 4, "mustSolve": false },
+      { "id": "p-3", "order": 6, "leetcodeId": 3, "title": "Longest Substring Without Repeating Characters", "difficulty": "Medium", "pattern": "Sliding Window", "importance": 5, "mustSolve": true },
+      { "id": "p-238", "order": 7, "leetcodeId": 238, "title": "Product of Array Except Self", "difficulty": "Medium", "pattern": "Prefix/Suffix", "importance": 5, "mustSolve": true },
+      { "id": "p-347", "order": 8, "leetcodeId": 347, "title": "Top K Frequent Elements", "difficulty": "Medium", "pattern": "Heap / Priority Queue", "importance": 5, "mustSolve": true },
+      { "id": "p-15", "order": 9, "leetcodeId": 15, "title": "3Sum", "difficulty": "Medium", "pattern": "Two Pointers", "importance": 5, "mustSolve": true },
+      { "id": "p-76", "order": 10, "leetcodeId": 76, "title": "Minimum Window Substring", "difficulty": "Hard", "pattern": "Sliding Window", "importance": 5, "mustSolve": true }
+    ]
+  },
+  {
+    "id": "week-2",
+    "number": 2,
+    "title": "Linked Lists, Stacks & Binary Search",
+    "summary": "Pointer manipulation, stack invariants, and the many faces of binary search.",
+    "problems": [
+      { "id": "p-20", "order": 1, "leetcodeId": 20, "title": "Valid Parentheses", "difficulty": "Easy", "pattern": "Stack", "importance": 5, "mustSolve": true },
+      { "id": "p-155", "order": 2, "leetcodeId": 155, "title": "Min Stack", "difficulty": "Medium", "pattern": "Stack", "importance": 4, "mustSolve": true },
+      { "id": "p-206", "order": 3, "leetcodeId": 206, "title": "Reverse Linked List", "difficulty": "Easy", "pattern": "Linked List", "importance": 5, "mustSolve": true },
+      { "id": "p-21", "order": 4, "leetcodeId": 21, "title": "Merge Two Sorted Lists", "difficulty": "Easy", "pattern": "Linked List", "importance": 4, "mustSolve": false },
+      { "id": "p-141", "order": 5, "leetcodeId": 141, "title": "Linked List Cycle", "difficulty": "Easy", "pattern": "Fast & Slow Pointers", "importance": 4, "mustSolve": false },
+      { "id": "p-19", "order": 6, "leetcodeId": 19, "title": "Remove Nth Node From End", "difficulty": "Medium", "pattern": "Two Pointers", "importance": 4, "mustSolve": false },
+      { "id": "p-143", "order": 7, "leetcodeId": 143, "title": "Reorder List", "difficulty": "Medium", "pattern": "Linked List", "importance": 5, "mustSolve": true },
+      { "id": "p-2", "order": 8, "leetcodeId": 2, "title": "Add Two Numbers", "difficulty": "Medium", "pattern": "Linked List", "importance": 4, "mustSolve": false },
+      { "id": "p-704", "order": 9, "leetcodeId": 704, "title": "Binary Search", "difficulty": "Easy", "pattern": "Binary Search", "importance": 5, "mustSolve": true },
+      { "id": "p-33", "order": 10, "leetcodeId": 33, "title": "Search in Rotated Sorted Array", "difficulty": "Medium", "pattern": "Binary Search", "importance": 5, "mustSolve": true },
+      { "id": "p-153", "order": 11, "leetcodeId": 153, "title": "Find Minimum in Rotated Sorted Array", "difficulty": "Medium", "pattern": "Binary Search", "importance": 5, "mustSolve": true },
+      { "id": "p-875", "order": 12, "leetcodeId": 875, "title": "Koko Eating Bananas", "difficulty": "Medium", "pattern": "Binary Search on Answer", "importance": 5, "mustSolve": true },
+      { "id": "p-981", "order": 13, "leetcodeId": 981, "title": "Time Based Key-Value Store", "difficulty": "Medium", "pattern": "Binary Search", "importance": 4, "mustSolve": false },
+      { "id": "p-146", "order": 14, "leetcodeId": 146, "title": "LRU Cache", "difficulty": "Medium", "pattern": "Design", "importance": 5, "mustSolve": true }
+    ]
+  },
+  {
+    "id": "week-3",
+    "number": 3,
+    "title": "Trees, Heaps & Graphs",
+    "summary": "Tree traversals, BST invariants, heaps, and graph search including topological sort.",
+    "problems": [
+      { "id": "p-226", "order": 1, "leetcodeId": 226, "title": "Invert Binary Tree", "difficulty": "Easy", "pattern": "Tree DFS", "importance": 5, "mustSolve": true },
+      { "id": "p-104", "order": 2, "leetcodeId": 104, "title": "Maximum Depth of Binary Tree", "difficulty": "Easy", "pattern": "Tree DFS", "importance": 5, "mustSolve": true },
+      { "id": "p-98", "order": 3, "leetcodeId": 98, "title": "Validate BST", "difficulty": "Medium", "pattern": "Binary Search Tree", "importance": 5, "mustSolve": true },
+      { "id": "p-230", "order": 4, "leetcodeId": 230, "title": "Kth Smallest in BST", "difficulty": "Medium", "pattern": "Binary Search Tree", "importance": 5, "mustSolve": true },
+      { "id": "p-102", "order": 5, "leetcodeId": 102, "title": "Level Order Traversal", "difficulty": "Medium", "pattern": "Tree BFS", "importance": 5, "mustSolve": true },
+      { "id": "p-236", "order": 6, "leetcodeId": 236, "title": "Lowest Common Ancestor", "difficulty": "Medium", "pattern": "Tree DFS", "importance": 5, "mustSolve": true },
+      { "id": "p-215", "order": 7, "leetcodeId": 215, "title": "Kth Largest Element", "difficulty": "Medium", "pattern": "Heap", "importance": 5, "mustSolve": true },
+      { "id": "p-295", "order": 8, "leetcodeId": 295, "title": "Median From Data Stream", "difficulty": "Hard", "pattern": "Heap", "importance": 5, "mustSolve": true },
+      { "id": "p-200", "order": 9, "leetcodeId": 200, "title": "Number of Islands", "difficulty": "Medium", "pattern": "Graph DFS/BFS", "importance": 5, "mustSolve": true },
+      { "id": "p-133", "order": 10, "leetcodeId": 133, "title": "Clone Graph", "difficulty": "Medium", "pattern": "Graph DFS/BFS", "importance": 5, "mustSolve": true },
+      { "id": "p-207", "order": 11, "leetcodeId": 207, "title": "Course Schedule", "difficulty": "Medium", "pattern": "Topological Sort", "importance": 5, "mustSolve": true },
+      { "id": "p-417", "order": 12, "leetcodeId": 417, "title": "Pacific Atlantic Water Flow", "difficulty": "Medium", "pattern": "Graph DFS/BFS", "importance": 4, "mustSolve": false },
+      { "id": "p-994", "order": 13, "leetcodeId": 994, "title": "Rotting Oranges", "difficulty": "Medium", "pattern": "Graph BFS", "importance": 4, "mustSolve": false }
+    ]
+  },
+  {
+    "id": "week-4",
+    "number": 4,
+    "title": "DP, Greedy & Backtracking",
+    "summary": "Recurrences and memoization, greedy proofs, interval merging, and exhaustive search.",
+    "problems": [
+      { "id": "p-70", "order": 1, "leetcodeId": 70, "title": "Climbing Stairs", "difficulty": "Easy", "pattern": "Dynamic Programming", "importance": 4, "mustSolve": false },
+      { "id": "p-198", "order": 2, "leetcodeId": 198, "title": "House Robber", "difficulty": "Medium", "pattern": "Dynamic Programming", "importance": 5, "mustSolve": true },
+      { "id": "p-213", "order": 3, "leetcodeId": 213, "title": "House Robber II", "difficulty": "Medium", "pattern": "Dynamic Programming", "importance": 4, "mustSolve": false },
+      { "id": "p-322", "order": 4, "leetcodeId": 322, "title": "Coin Change", "difficulty": "Medium", "pattern": "Dynamic Programming", "importance": 5, "mustSolve": true },
+      { "id": "p-300", "order": 5, "leetcodeId": 300, "title": "Longest Increasing Subsequence", "difficulty": "Medium", "pattern": "Dynamic Programming", "importance": 5, "mustSolve": true },
+      { "id": "p-1143", "order": 6, "leetcodeId": 1143, "title": "Longest Common Subsequence", "difficulty": "Medium", "pattern": "Dynamic Programming", "importance": 4, "mustSolve": false },
+      { "id": "p-139", "order": 7, "leetcodeId": 139, "title": "Word Break", "difficulty": "Medium", "pattern": "Dynamic Programming", "importance": 5, "mustSolve": true },
+      { "id": "p-55", "order": 8, "leetcodeId": 55, "title": "Jump Game", "difficulty": "Medium", "pattern": "Greedy", "importance": 5, "mustSolve": true },
+      { "id": "p-45", "order": 9, "leetcodeId": 45, "title": "Jump Game II", "difficulty": "Medium", "pattern": "Greedy", "importance": 4, "mustSolve": false },
+      { "id": "p-134", "order": 10, "leetcodeId": 134, "title": "Gas Station", "difficulty": "Medium", "pattern": "Greedy", "importance": 4, "mustSolve": false },
+      { "id": "p-56", "order": 11, "leetcodeId": 56, "title": "Merge Intervals", "difficulty": "Medium", "pattern": "Intervals", "importance": 5, "mustSolve": true },
+      { "id": "p-57", "order": 12, "leetcodeId": 57, "title": "Insert Interval", "difficulty": "Medium", "pattern": "Intervals", "importance": 5, "mustSolve": true },
+      { "id": "p-435", "order": 13, "leetcodeId": 435, "title": "Non-overlapping Intervals", "difficulty": "Medium", "pattern": "Intervals", "importance": 4, "mustSolve": false },
+      { "id": "p-39", "order": 14, "leetcodeId": 39, "title": "Combination Sum", "difficulty": "Medium", "pattern": "Backtracking", "importance": 5, "mustSolve": true },
+      { "id": "p-79", "order": 15, "leetcodeId": 79, "title": "Word Search", "difficulty": "Medium", "pattern": "Backtracking", "importance": 4, "mustSolve": false }
+    ]
+  }
+]

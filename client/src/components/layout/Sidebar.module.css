@@ -1,0 +1,68 @@
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 20px 12px;
+  overflow-y: auto;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 20px;
+}
+
+.brandTitle {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.brandSubtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.sectionLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding: 18px 10px 6px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.link:hover {
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.active {
+  background: rgba(108, 140, 255, 0.14);
+  color: var(--accent);
+}
+
+.weekNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: var(--surface-raised);
+  font-size: 11px;
+  font-weight: 600;
+}

@@ -1,0 +1,47 @@
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+.headline {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.big {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.caption {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.tiles {
+  display: flex;
+  gap: 32px;
+  margin-top: 18px;
+}
+
+.tiles > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.tileValue {
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.tileLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+}

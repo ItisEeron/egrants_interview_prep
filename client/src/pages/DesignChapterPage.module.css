@@ -1,0 +1,23 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.weekLink:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 4px;
+}

@@ -1,0 +1,17 @@
+{
+  "weekly": [
+    { "id": "wk-coding", "label": "Finished all coding problems" },
+    { "id": "wk-must-solve", "label": "Reviewed all Must Solve problems" },
+    { "id": "wk-mock", "label": "Completed one mock interview" },
+    { "id": "wk-system-design", "label": "Reviewed system design" },
+    { "id": "wk-behavioral", "label": "Practiced behavioral questions" }
+  ],
+  "finalInterview": [
+    { "id": "fi-clarify", "label": "Clarify requirements first" },
+    { "id": "fi-estimate", "label": "Estimate scale before architecture" },
+    { "id": "fi-diagram", "label": "Draw a simple diagram" },
+    { "id": "fi-bottlenecks", "label": "Discuss bottlenecks" },
+    { "id": "fi-monitoring", "label": "Mention monitoring" },
+    { "id": "fi-tradeoffs", "label": "End with trade-offs and future improvements" }
+  ]
+}

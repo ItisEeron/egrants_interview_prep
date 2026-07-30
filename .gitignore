@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.env
+server/data/progress.json
+.DS_Store
+*.log

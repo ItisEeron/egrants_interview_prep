@@ -1,0 +1,60 @@
+.order {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.title:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.solvedRow .title {
+  color: var(--text-muted);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.pattern {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.stars {
+  color: var(--warning);
+  font-size: 11px;
+  letter-spacing: -1px;
+  white-space: nowrap;
+}
+
+.starsDim {
+  color: var(--border);
+}
+
+.notesToggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.notesToggle:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.notesCell {
+  padding-bottom: 12px;
+}

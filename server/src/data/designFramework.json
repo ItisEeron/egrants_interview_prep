@@ -1,0 +1,21 @@
+{
+  "steps": [
+    { "id": "step-1", "order": 1, "title": "Clarify Requirements", "prompt": "Identify functional requirements, non-functional requirements, constraints, assumptions, and success metrics." },
+    { "id": "step-2", "order": 2, "title": "Capacity Estimation", "prompt": "Estimate users, QPS, storage, memory, network bandwidth, and growth." },
+    { "id": "step-3", "order": 3, "title": "API Design", "prompt": "Define endpoints, request/response models, and error handling." },
+    { "id": "step-4", "order": 4, "title": "Data Model", "prompt": "Choose storage technology and explain schema/key design." },
+    { "id": "step-5", "order": 5, "title": "High-Level Architecture", "prompt": "Describe clients, load balancers, application servers, caches, databases, queues, and storage." },
+    { "id": "step-6", "order": 6, "title": "Scalability", "prompt": "Explain horizontal scaling, sharding, partitioning, and load balancing." },
+    { "id": "step-7", "order": 7, "title": "Reliability", "prompt": "Discuss replication, failover, backups, disaster recovery, and health checks." },
+    { "id": "step-8", "order": 8, "title": "Bottlenecks & Trade-offs", "prompt": "Identify hot keys, hotspots, consistency, latency, throughput, and cost trade-offs." },
+    { "id": "step-9", "order": 9, "title": "Monitoring", "prompt": "Metrics, logging, tracing, alerts, dashboards, and SLOs." }
+  ],
+  "practiceChecklist": [
+    { "id": "pc-scale", "label": "Estimated scale" },
+    { "id": "pc-apis", "label": "Designed APIs" },
+    { "id": "pc-data-model", "label": "Discussed data model" },
+    { "id": "pc-scaling", "label": "Explained scaling" },
+    { "id": "pc-failures", "label": "Covered failures" },
+    { "id": "pc-tradeoffs", "label": "Explained trade-offs" }
+  ]
+}

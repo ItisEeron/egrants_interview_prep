@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ch-1",
+    "number": 1,
+    "weekId": "week-1",
+    "title": "Design a Distributed Cache",
+    "coreConcepts": ["Cache-aside", "Write-through", "TTL", "LRU/LFU", "Replication", "Consistent hashing"],
+    "followUpQuestions": ["How would you handle hot keys?", "How do you invalidate cache?", "How is cache warmed?"]
+  },
+  {
+    "id": "ch-2",
+    "number": 2,
+    "weekId": "week-1",
+    "title": "Design Redis / Memorystore",
+    "coreConcepts": ["Replication", "Persistence", "Failover", "Sharding", "Sentinel/Cluster concepts"],
+    "followUpQuestions": ["How do replicas stay consistent?", "What happens during failover?", "How are writes routed?"]
+  },
+  {
+    "id": "ch-3",
+    "number": 3,
+    "weekId": "week-2",
+    "title": "Design a URL Shortener",
+    "coreConcepts": ["ID generation", "Database", "Caching", "Analytics"],
+    "followUpQuestions": ["How do you avoid collisions?", "How do you scale reads?"]
+  },
+  {
+    "id": "ch-4",
+    "number": 4,
+    "weekId": "week-2",
+    "title": "Design a Rate Limiter",
+    "coreConcepts": ["Token bucket", "Leaky bucket", "Redis counters"],
+    "followUpQuestions": ["Distributed limits?", "Clock skew?"]
+  },
+  {
+    "id": "ch-5",
+    "number": 5,
+    "weekId": "week-2",
+    "title": "Design Dropbox",
+    "coreConcepts": ["Chunking", "Metadata", "Synchronization"],
+    "followUpQuestions": ["Conflict resolution?", "Large file uploads?"]
+  },
+  {
+    "id": "ch-6",
+    "number": 6,
+    "weekId": "week-3",
+    "title": "Design Notification Service",
+    "coreConcepts": ["Queues", "Retries", "Fan-out"],
+    "followUpQuestions": ["Duplicate delivery?", "Ordering?"]
+  },
+  {
+    "id": "ch-7",
+    "number": 7,
+    "weekId": "week-3",
+    "title": "Design Kafka",
+    "coreConcepts": ["Partitions", "Consumers", "Offsets"],
+    "followUpQuestions": ["Rebalancing?", "Exactly-once?"]
+  },
+  {
+    "id": "ch-8",
+    "number": 8,
+    "weekId": "week-4",
+    "title": "Design Search Autocomplete",
+    "coreConcepts": ["Trie", "Ranking", "Caching"],
+    "followUpQuestions": ["How to personalize results?"]
+  },
+  {
+    "id": "ch-9",
+    "number": 9,
+    "weekId": "week-4",
+    "title": "Design API Gateway",
+    "coreConcepts": ["Authentication", "Routing", "Rate limiting"],
+    "followUpQuestions": ["How to handle failures?"]
+  },
+  {
+    "id": "ch-10",
+    "number": 10,
+    "weekId": "week-4",
+    "title": "Design Metrics Platform",
+    "coreConcepts": ["Time-series", "Aggregation", "Retention"],
+    "followUpQuestions": ["How to reduce storage?"]
+  }
+]
