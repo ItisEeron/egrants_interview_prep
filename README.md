@@ -40,11 +40,13 @@ src/
   App.jsx          providers + routes
   data/            the workbook content, transcribed to JSON, plus curriculum.js
   firebase/        Firebase config and lazy initialisation
-  storage/         where progress is saved; swappable (see below)
+  storage/         where progress and designs are saved; swappable (see below)
+  analysis/        describeDesign.js — turns a diagram into a plain description
   context/         AuthContext (who you are), CurriculumContext (static
-                   content), ProgressContext (user state)
+                   content), ProgressContext (user state), DesignContext (one
+                   chapter's diagram, mounted per chapter)
   hooks/           small readers on top of the contexts
-  constants/       shared values like the confidence levels
+  constants/       shared values: confidence levels, the design component catalog
   pages/           one file per route, composes components
   components/
     common/        generic and reusable: Card, Badge, Checkbox, Checklist, ProgressBar
@@ -52,6 +54,7 @@ src/
     auth/          AuthGate, SignInPage, AccountFooter
     coding/        the problem table, confidence picker, notes, weekly checklist
     systemDesign/  framework steps, concept list, practice checklist
+    designCanvas/  the React Flow diagram, its notes, and the summary
     dashboard/     overall stats, week cards, final checklist
   styles/          global.css holds the colors and spacing tokens
 ```
@@ -90,6 +93,18 @@ first-run behaviour.
 Because nothing outside `storage/` knows which backend is active, adding another
 one requires no changes anywhere else.
 
+Design diagrams follow the same contract in `storage/DesignStore.js`, but in their
+own documents — one per chapter, at `users/{uid}/designs/{chapterId}`. They are
+kept out of the progress document for two reasons. Progress is rewritten in full
+on every edit, and a diagram is far larger than a checkbox, so dragging a node
+would rewrite every note in the account. And only one chapter's diagram is ever
+on screen, so there is no reason to load ten of them.
+
+`toStoredDesign()` decides what actually gets written. React Flow hangs
+bookkeeping on nodes as you interact with them — measured pixel sizes, selection
+flags — and none of it describes the design or survives a move to another screen.
+Listing the fields explicitly keeps the stored shape one we define.
+
 ## How progress is saved
 
 Checkboxes and confidence save on click. Notes save when the field loses focus,
@@ -109,6 +124,39 @@ next edit retries the whole document.
 To start over in local mode, clear the site's localStorage. For a signed-in
 account, delete the `users/{uid}` document in the Firestore console. Either way
 the next read re-seeds from `seedProgress.json`.
+
+## System design diagrams
+
+Each design chapter has a canvas built on [React Flow](https://reactflow.dev).
+You add components from a palette, drag from a node's edge to connect them, and
+select a connection to label it. Below the canvas is a free text section for
+assumptions, capacity estimates, and tradeoffs — the half of a design interview
+that the picture does not capture.
+
+Diagrams save about a second after you stop editing, and leaving the page flushes
+whatever is still pending. There is no save button, so the card header says
+whether the current state is stored.
+
+Because diagrams live in a subcollection, they needed a rules change: a rule on
+`users/{userId}` covers that document alone and does not cascade to documents
+beneath it, so `firestore.rules` now matches `users/{userId}/{document=**}`.
+**Those rules have to be published before a signed-in account can save a
+diagram** — otherwise every write is denied. See *Keeping the rules honest*.
+
+The components in the palette are not anonymous boxes. Each carries a `kind` from
+`constants/designNodes.js` — service, database, cache, queue, and so on — and each
+connection carries what it means. That is the difference between a drawing and
+data: `analysis/describeDesign.js` turns the graph into a plain description of
+which components exist, what talks to what, and which boxes were never wired up.
+
+Today that description feeds the summary under the canvas. It is also the shape
+you would serialise into a prompt to have an agent critique a design, which is why
+it is a pure function with no React in it and no knowledge of what happens to its
+output. Adding that means writing a caller, not rewriting the diagram.
+
+Adding a component type is a matter of adding an entry to `COMPONENT_KINDS`; the
+palette, the node rendering, the minimap colors, and the summary all read from
+that one list.
 
 ## Deploying
 

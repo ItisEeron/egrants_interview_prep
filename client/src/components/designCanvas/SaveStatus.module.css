@@ -1,0 +1,14 @@
+.saved,
+.saving,
+.error {
+  font-size: 12px;
+}
+
+.saved,
+.saving {
+  color: var(--text-muted);
+}
+
+.error {
+  color: var(--danger);
+}

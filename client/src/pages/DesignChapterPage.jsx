@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { Card } from '../components/common/Card.jsx';
 import { ErrorMessage, LoadingMessage } from '../components/common/StatusMessage.jsx';
+import { DesignSection } from '../components/designCanvas/DesignSection.jsx';
 import { ConceptList, FollowUpQuestions } from '../components/systemDesign/ConceptList.jsx';
 import { FrameworkStepList } from '../components/systemDesign/FrameworkStepList.jsx';
 import { PracticeChecklist } from '../components/systemDesign/PracticeChecklist.jsx';
@@ -41,6 +42,8 @@ export function DesignChapterPage() {
           onSaveNotes={(stepId, notes) => updateChapterStepNotes(chapter.id, stepId, notes)}
         />
       </Card>
+
+      <DesignSection chapter={chapter} />
 
       <Card title="Common follow-up questions">
         <FollowUpQuestions questions={chapter.followUpQuestions} />

@@ -1,0 +1,58 @@
+/* --kind-color is set inline from the component catalog, so one rule set
+   styles every component type. */
+.node {
+  min-width: 168px;
+  padding: 8px 12px 10px;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--kind-color);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  color: var(--text);
+}
+
+.selected {
+  border-color: var(--kind-color);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--kind-color) 35%, transparent);
+}
+
+.kind {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--kind-color);
+}
+
+.label,
+.detail {
+  display: block;
+  width: 100%;
+  padding: 1px 0;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.detail {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.label:focus,
+.detail:focus {
+  border-bottom: 1px solid var(--kind-color);
+}
+
+.handle {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--bg);
+  background: var(--kind-color);
+}
