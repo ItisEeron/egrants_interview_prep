@@ -21,13 +21,73 @@
   color: var(--danger);
 }
 
+.menuButton {
+  display: none;
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 30;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.menuIcon,
+.menuIcon::before,
+.menuIcon::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 1px;
+}
+
+.menuIcon {
+  position: relative;
+}
+
+.menuIcon::before,
+.menuIcon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.menuIcon::before {
+  top: -6px;
+}
+
+.menuIcon::after {
+  top: 6px;
+}
+
+.overlay {
+  display: none;
+}
+
 @media (max-width: 860px) {
   .shell {
     flex-direction: column;
   }
 
   .main {
-    padding: 24px 20px 48px;
+    padding: 72px 20px 48px;
     width: 100%;
+  }
+
+  .menuButton {
+    display: flex;
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 20;
   }
 }

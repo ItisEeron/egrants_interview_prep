@@ -7,23 +7,31 @@ function linkClass({ isActive }) {
   return isActive ? `${styles.link} ${styles.active}` : styles.link;
 }
 
-export function Sidebar() {
+export function Sidebar({ isOpen = false, onNavigate = () => {}, onClose = () => {} }) {
   const { curriculum } = useCurriculum();
 
   return (
-    <nav className={styles.sidebar}>
+    <nav className={isOpen ? `${styles.sidebar} ${styles.open}` : styles.sidebar}>
       <div className={styles.brand}>
         <span className={styles.brandTitle}>Interview Prep</span>
         <span className={styles.brandSubtitle}>Senior Engineer</span>
+        <button
+          type="button"
+          className={styles.closeButton}
+          onClick={onClose}
+          aria-label="Close navigation menu"
+        >
+          ×
+        </button>
       </div>
 
-      <NavLink to="/" end className={linkClass}>
+      <NavLink to="/" end className={linkClass} onClick={onNavigate}>
         Dashboard
       </NavLink>
 
       <div className={styles.sectionLabel}>Weeks</div>
       {curriculum?.weeks.map((week) => (
-        <NavLink key={week.id} to={`/weeks/${week.id}`} className={linkClass}>
+        <NavLink key={week.id} to={`/weeks/${week.id}`} className={linkClass} onClick={onNavigate}>
           <span className={styles.weekNumber}>{week.number}</span>
           {week.title}
         </NavLink>
@@ -31,7 +39,7 @@ export function Sidebar() {
 
       <div className={styles.sectionLabel}>System Design</div>
       {curriculum?.designChapters.map((chapter) => (
-        <NavLink key={chapter.id} to={`/design/${chapter.id}`} className={linkClass}>
+        <NavLink key={chapter.id} to={`/design/${chapter.id}`} className={linkClass} onClick={onNavigate}>
           <span className={styles.weekNumber}>{chapter.number}</span>
           {chapter.title.replace(/^Design (a |the )?/, '')}
         </NavLink>
