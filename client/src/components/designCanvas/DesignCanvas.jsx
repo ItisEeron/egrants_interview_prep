@@ -1,6 +1,7 @@
 import { useCallback, useRef } from 'react';
 import {
   Background,
+  ConnectionMode,
   Controls,
   MarkerType,
   MiniMap,
@@ -58,6 +59,9 @@ function Canvas() {
     [updateEdges],
   );
 
+  // Loose mode lets any handle connect to any other, so a connection is
+  // directed by which end you dragged from rather than by how the handles were
+  // typed. See the note in ComponentNode.
   const onConnect = useCallback(
     (connection) => updateEdges((edges) => addEdge(connection, edges)),
     [updateEdges],
@@ -99,6 +103,7 @@ function Canvas() {
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
+          connectionMode={ConnectionMode.Loose}
           colorMode="dark"
           fitView
           fitViewOptions={fitViewOptions}

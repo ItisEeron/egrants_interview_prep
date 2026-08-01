@@ -14,6 +14,13 @@ import styles from './ComponentNode.module.css';
  *
  * The `nodrag` class is React Flow's: without it, selecting text with the mouse
  * would drag the node instead.
+ *
+ * All four handles are sources. React Flow reports whichever end is the
+ * source-typed handle as the edge's source, regardless of which end you started
+ * dragging from — so with the usual left-target/right-source split, dragging
+ * right to left produced an arrow pointing left to right. Making every handle a
+ * source (paired with `ConnectionMode.Loose` on the canvas) means the end you
+ * drag from is the source, and the arrowhead lands where you let go.
  */
 export function ComponentNode({ id, data, selected }) {
   const { updateNodeData } = useDesign();
@@ -24,8 +31,8 @@ export function ComponentNode({ id, data, selected }) {
       className={selected ? `${styles.node} ${styles.selected}` : styles.node}
       style={{ '--kind-color': kind.color }}
     >
-      <Handle type="target" id="top" position={Position.Top} className={styles.handle} />
-      <Handle type="target" id="left" position={Position.Left} className={styles.handle} />
+      <Handle type="source" id="top" position={Position.Top} className={styles.handle} />
+      <Handle type="source" id="left" position={Position.Left} className={styles.handle} />
 
       <span className={styles.kind}>{kind.label}</span>
 

@@ -28,6 +28,10 @@ jobs:
 
       - run: npm ci
 
+      # Runs before the build so a broken test stops the deploy rather than
+      # being noticed after it is live. Node's own test runner — no dependency.
+      - run: npm test
+
       - run: npm run build
         env:
           # Derived from the repo so renaming it does not break asset paths.

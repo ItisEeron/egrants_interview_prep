@@ -8,6 +8,20 @@ It is a static site. There is no server: the workbook content is bundled into th
 build, and progress is saved either in the browser or, once Firebase is
 configured, to Firestore against your Google account.
 
+## Tests
+
+```bash
+npm test
+```
+
+Node's built-in runner, so there is nothing to install and no config file. Tests
+sit next to what they test as `*.test.js` and cover the pure logic — what gets
+written to storage, what a corrupt document is repaired into, and how a diagram
+is described. They run in CI before the build, so a failure stops the deploy.
+
+Components are not tested; that would need a DOM and a test framework, which is a
+bigger commitment than this project has needed so far.
+
 ## Requirements
 
 Node 20.19 or newer. This machine uses nvm:
