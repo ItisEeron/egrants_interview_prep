@@ -13,7 +13,13 @@
  * pulls in `firebase/config.js`, which reads `import.meta.env`, populated by
  * Vite but not by the plain `node --test` runner these tests run under.
  */
-export const DAILY_AI_CALL_LIMIT = 20;
+/**
+ * Set to catch a runaway loop, not to stay under Google's quota — even the
+ * most pessimistic published free-tier figure is far above what one person
+ * clicking buttons reaches. At roughly 3-6 calls per problem this covers a
+ * heavy session (8-15 problems) and still trips long before anything alarming.
+ */
+export const DAILY_AI_CALL_LIMIT = 50;
 
 function todayKey(now) {
   return now.toISOString().slice(0, 10);
