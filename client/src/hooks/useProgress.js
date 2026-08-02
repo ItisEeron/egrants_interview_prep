@@ -7,7 +7,10 @@ export function useProgress() {
 
 export function useProblemProgress(problemId) {
   const { progress } = useProgressContext();
-  return progress?.problems[problemId] ?? EMPTY_PROBLEM_PROGRESS;
+  // Spread rather than `??`: a record can exist (e.g. seeded before a field
+  // like `submissions` was added) without carrying every current field, and
+  // callers should never have to guard against that themselves.
+  return { ...EMPTY_PROBLEM_PROGRESS, ...progress?.problems[problemId] };
 }
 
 export function useChapterProgress(chapterId) {

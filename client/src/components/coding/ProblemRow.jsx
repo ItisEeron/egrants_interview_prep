@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Badge, DifficultyBadge } from '../common/Badge.jsx';
 import { Checkbox } from '../common/Checkbox.jsx';
 import { ConfidencePicker } from './ConfidencePicker.jsx';
@@ -16,7 +17,7 @@ function leetcodeUrl(problem) {
   return `https://leetcode.com/problems/${problem.slug}/`;
 }
 
-export function ProblemRow({ problem }) {
+export function ProblemRow({ problem, weekId }) {
   const record = useProblemProgress(problem.id);
   const { updateProblem } = useProgress();
   const [notesOpen, setNotesOpen] = useState(Boolean(record.notes));
@@ -33,6 +34,9 @@ export function ProblemRow({ problem }) {
             <DifficultyBadge difficulty={problem.difficulty} />
             <span className={styles.pattern}>{problem.pattern}</span>
             {problem.mustSolve ? <Badge tone="accent">Must solve</Badge> : null}
+            <Link to={`/weeks/${weekId}/problems/${problem.id}`} className={styles.practiceLink}>
+              Practice
+            </Link>
           </div>
         </td>
         <td className={styles.stars} title={`Importance ${problem.importance} of 5`}>

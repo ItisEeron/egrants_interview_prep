@@ -7,6 +7,7 @@ import { ProgressProvider } from './context/ProgressContext.jsx';
 import { DashboardPage } from './pages/DashboardPage.jsx';
 import { WeekPage } from './pages/WeekPage.jsx';
 import { DesignChapterPage } from './pages/DesignChapterPage.jsx';
+import { ProblemPracticePage } from './pages/ProblemPracticePage.jsx';
 
 // On GitHub Pages the app is served from /<repo>/, not the domain root. Vite
 // puts that prefix in BASE_URL; the router needs it without the trailing slash.
@@ -23,6 +24,7 @@ export function App() {
                 <Route element={<AppLayout />}>
                   <Route index element={<DashboardPage />} />
                   <Route path="weeks/:weekId" element={<WeekPage />} />
+                  <Route path="weeks/:weekId/problems/:problemId" element={<ProblemPracticePage />} />
                   <Route path="design/:chapterId" element={<DesignChapterPage />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Route>

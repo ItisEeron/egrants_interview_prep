@@ -1,22 +1,18 @@
 import { useState } from 'react';
-import { describeDesign } from '../../analysis/describeDesign.js';
-import { requestFeedback, requestFollowUpQuestions, requestHint } from '../../ai/designCritique.js';
-import { useAuth } from '../../context/AuthContext.jsx';
-import { useAiAction } from '../../hooks/useAiAction.js';
-import { useDesign } from '../../hooks/useDesign.js';
-import styles from './AIAnalysis.module.css';
+import { requestFeedback, requestFollowUpQuestions, requestHint } from '../../../ai/codeCritique.js';
+import { useAuth } from '../../../context/AuthContext.jsx';
+import { useAiAction } from '../../../hooks/useAiAction.js';
+import styles from './CodeCritique.module.css';
 
 /**
- * An optional AI critique of the diagram, on request only.
- *
- * Three separate actions rather than one combined call: analyzing and asking
- * for a hint are both things you'd want mid-design, repeatedly, as the diagram
- * changes — feedback is the opposite, a final score you ask for once you're
- * done, so it never fires as a side effect of the other two.
+ * An optional AI critique of the code, on request only — the coding-problem
+ * counterpart of `designCanvas/AIAnalysis.jsx`. Same three actions, same
+ * shared rate limit (`useAiAction`), same reasoning for keeping feedback
+ * separate from analyze/hint: a final score is something you ask for once
+ * you're done, not a side effect of getting a hint mid-attempt.
  */
-export function AIAnalysis({ chapter }) {
+export function CodeCritique({ problem, language, code }) {
   const { isEnabled, user, signIn } = useAuth();
-  const { design } = useDesign();
   const [questions, setQuestions] = useState(null);
   const [hints, setHints] = useState([]);
   const [feedback, setFeedback] = useState(null);
@@ -29,7 +25,7 @@ export function AIAnalysis({ chapter }) {
   if (!user) {
     return (
       <div className={styles.signedOut}>
-        <p className={styles.muted}>Sign in to get an AI critique of this design.</p>
+        <p className={styles.muted}>Sign in to get an AI critique of your code.</p>
         <button type="button" className={styles.secondaryButton} onClick={signIn}>
           Continue with Google
         </button>
@@ -38,21 +34,22 @@ export function AIAnalysis({ chapter }) {
   }
 
   const sessionContext = { questions: questions ?? [], hints };
+  const submission = { problem, language, code };
 
   const handleAnalyze = () =>
     run('analyze', async () => {
-      setQuestions(await requestFollowUpQuestions(describeDesign(design, chapter)));
+      setQuestions(await requestFollowUpQuestions(submission));
     });
 
   const handleHint = () =>
     run('hint', async () => {
-      const hint = await requestHint(describeDesign(design, chapter), sessionContext);
+      const hint = await requestHint(submission, sessionContext);
       setHints((prev) => [...prev, hint]);
     });
 
   const handleFeedback = () =>
     run('feedback', async () => {
-      setFeedback(await requestFeedback(describeDesign(design, chapter), sessionContext));
+      setFeedback(await requestFeedback(submission, sessionContext));
     });
 
   const isBusy = pending !== null || usage?.remaining === 0;
@@ -61,7 +58,7 @@ export function AIAnalysis({ chapter }) {
     <div className={styles.panel}>
       <div className={styles.actions}>
         <button type="button" className={styles.primaryButton} disabled={isBusy} onClick={handleAnalyze}>
-          {pending === 'analyze' ? 'Analyzing…' : 'Analyze my design'}
+          {pending === 'analyze' ? 'Analyzing…' : 'Analyze my code'}
         </button>
         <button type="button" className={styles.secondaryButton} disabled={isBusy} onClick={handleHint}>
           {pending === 'hint' ? 'Thinking…' : 'Get a hint'}

@@ -11,6 +11,12 @@ export function useWeek(weekId) {
   return { week, chapters, isLoading, error };
 }
 
+export function useProblem(weekId, problemId) {
+  const { week, isLoading, error } = useWeek(weekId);
+  const problem = week?.problems.find((candidate) => candidate.id === problemId) ?? null;
+  return { week, problem, isLoading, error };
+}
+
 export function useDesignChapter(chapterId) {
   const { curriculum, isLoading, error } = useCurriculumContext();
   const chapter = curriculum?.designChapters.find((c) => c.id === chapterId) ?? null;

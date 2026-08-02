@@ -34,7 +34,7 @@ export function WeekPage() {
       </header>
 
       <Card title="Coding problems">
-        <ProblemTable problems={week.problems} />
+        <ProblemTable problems={week.problems} weekId={week.id} />
       </Card>
 
       <Card title="System design for this week">

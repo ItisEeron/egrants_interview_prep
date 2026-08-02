@@ -10,6 +10,7 @@ export const EMPTY_PROBLEM_PROGRESS = {
   reviewed: false,
   confidence: 'none',
   notes: '',
+  submissions: {},
 };
 
 export const EMPTY_CHAPTER_PROGRESS = {

@@ -53,22 +53,27 @@ src/
   main.jsx         mounts React
   App.jsx          providers + routes
   data/            the workbook content, transcribed to JSON, plus curriculum.js
-  firebase/        Firebase config and lazy initialisation
+  firebase/        Firebase config, lazy initialisation, and AI Logic access
   storage/         where progress and designs are saved; swappable (see below)
   analysis/        describeDesign.js — turns a diagram into a plain description
+  ai/              prompt builders and requests for both AI critique features,
+                   plus the shared daily rate limiter
   context/         AuthContext (who you are), CurriculumContext (static
                    content), ProgressContext (user state), DesignContext (one
                    chapter's diagram, mounted per chapter)
-  hooks/           small readers on top of the contexts
-  constants/       shared values: confidence levels, the design component catalog
+  hooks/           small readers on top of the contexts, plus the AI usage/
+                   action helpers shared by both critique panels
+  constants/       shared values: confidence levels, the design component
+                   catalog, generic per-language code boilerplate
   pages/           one file per route, composes components
   components/
     common/        generic and reusable: Card, Badge, Checkbox, Checklist, ProgressBar
     layout/        AppLayout, Sidebar
     auth/          AuthGate, SignInPage, AccountFooter
     coding/        the problem table, confidence picker, notes, weekly checklist
+    coding/practice/  the code editor and its AI critique panel
     systemDesign/  framework steps, concept list, practice checklist
-    designCanvas/  the React Flow diagram, its notes, and the summary
+    designCanvas/  the React Flow diagram, its notes, and its AI critique panel
     dashboard/     overall stats, week cards, final checklist
   styles/          global.css holds the colors and spacing tokens
 ```
@@ -171,19 +176,20 @@ not rewriting the diagram.
 
 ### AI critique (optional)
 
-The "AI critique" card has three buttons, each a separate request:
+Both the system-design canvas and the coding-problem practice editor (see
+below) have an "AI critique" card with three buttons, each a separate request:
 
-- **Analyze my design** — asks what the current diagram hasn't addressed yet
-  (scaling, failure handling, consistency, security) and lists follow-up
-  questions. An empty list means nothing obvious is missing.
-- **Get a hint** — one specific nudge, aware of what's already been raised this
-  session so it doesn't repeat itself. Independent of Analyze; use it any time.
-- **Get feedback** — a score plus strengths and weaknesses. This one only ever
-  runs when clicked; it never fires as a side effect of the other two, since a
-  final score should be something you ask for, not something sprung on you.
-
-This only applies to system-design chapters, not the coding problems — there is
-no equivalent for those.
+- **Analyze** — asks what hasn't been addressed yet (for a design: scaling,
+  failure handling, consistency, security; for code: edge cases, correctness,
+  complexity) and lists follow-up questions. An empty list means nothing
+  obvious is missing.
+- **Get a hint** — one specific nudge, aware of what's already been raised
+  this session so it doesn't repeat itself. Independent of Analyze; use it
+  any time.
+- **Get feedback** — a score plus strengths and weaknesses. This one only
+  ever runs when clicked; it never fires as a side effect of the other two,
+  since a final score should be something you ask for, not something sprung
+  on you.
 
 It calls Gemini through **Firebase AI Logic**, not a raw API key: the client SDK
 (`firebase/ai`) proxies the request through the project's own Firebase backend,
@@ -191,17 +197,51 @@ using the `GoogleAIBackend` (the free-tier Gemini Developer API, not the
 metered Vertex AI backend). There is nothing to add to `.env.local` for this —
 it rides on the Firebase config already there. It does need one thing enabled
 once in the Firebase console: **Build → AI Logic → Get started**, choosing the
-**Gemini Developer API** as the backend. The card is only shown to a signed-in
-user, both because the diagram it critiques is per-account already and to keep
-the free-tier quota from being spent by anonymous visitors to the public site.
+**Gemini Developer API** as the backend. Both cards are only shown to a
+signed-in user, both because the diagram/code they critique is per-account
+already and to keep the free-tier quota from being spent by anonymous
+visitors to the public site.
 
 Analysis, hints, and feedback are session-only — kept in React state, not saved
 to Firestore or localStorage. They reset on reload. That avoids a second storage
-schema for something that would go stale the moment the diagram changes anyway.
+schema for something that would go stale the moment the diagram or code changes
+anyway.
+
+**Rate limit.** Both cards share one daily cap (`DAILY_AI_CALL_LIMIT` in
+`ai/rateLimiter.js`), tracked in Firestore at `users/{uid}/meta/aiUsage` and
+enforced with a transaction so two rapid clicks can't both slip through before
+either write lands. It's client-tracked only, not a server-side guarantee — a
+determined user could call the SDK directly and bypass it — which is fine
+while this is single-user, but a public deployment would want a server-side
+check too, not just this.
 
 Adding a component type is a matter of adding an entry to `COMPONENT_KINDS`; the
 palette, the node rendering, the minimap colors, and the summary all read from
 that one list.
+
+## Coding practice editor
+
+Every coding problem has a "Practice" link (`weeks/:weekId/problems/:problemId`)
+to a page with a [Monaco](https://microsoft.github.io/monaco-editor/) editor —
+the same engine behind VS Code — and its own "AI critique" card. There's no
+compiler behind it: nothing is run or checked for correctness. The AI reads the
+code the way an interviewer reads a whiteboard, not the way a test suite does.
+
+Because there's no execution, there's also no per-problem starter code —
+writing a correct method signature for every problem in three languages would
+be exactly the kind of content-authoring cost this feature was scoped to avoid.
+Instead, `constants/codeBoilerplate.js` has one generic skeleton per language
+(Java, Python, C++), the same regardless of which problem you're on.
+
+Code is saved per problem *and* per language — switching from Python to Java
+on the same problem doesn't lose what you wrote in Python — in the same
+per-problem progress document used for confidence and notes
+(`storage/ProgressStore.js`'s `submissions` field), through
+`updateProblemSubmission` in `ProgressContext`. It saves on blur, the same as
+the notes field elsewhere in the app, and flushes on an explicit language
+switch or on leaving the page — Monaco doesn't fire a blur event just because
+its `language`/`value` props change without unmounting, so those two moments
+need their own flush.
 
 ## Deploying
 
@@ -220,9 +260,10 @@ published to GitHub Pages at `https://<user>.github.io/egrants_interview_prep/`.
 6. **Authentication → Settings → Authorized domains** — add
    `<user>.github.io`, or sign-in will be rejected from the deployed site.
 7. **Build → AI Logic → Get started** — choose the **Gemini Developer API**
-   backend. Optional: only needed for the "AI critique" card on system-design
-   chapters (see *AI critique (optional)* above). Skipping this leaves the rest
-   of the app working normally; the card just fails when clicked.
+   backend. Optional: only needed for the "AI critique" cards on system-design
+   chapters and the coding practice editor (see *AI critique (optional)*
+   above). Skipping this leaves the rest of the app working normally; the
+   cards just fail when clicked.
 
 Steps 3 and 6 have to happen in the console. Enabling Google sign-in makes
 Firebase provision an OAuth client for you; driving that through the Identity

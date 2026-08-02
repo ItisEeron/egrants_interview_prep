@@ -30,6 +30,18 @@
   color: var(--text-muted);
 }
 
+.practiceLink {
+  font-size: 12px;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.practiceLink:hover {
+  border-color: var(--accent);
+}
+
 .stars {
   color: var(--warning);
   font-size: 11px;

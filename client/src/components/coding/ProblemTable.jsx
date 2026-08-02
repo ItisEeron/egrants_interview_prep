@@ -1,7 +1,7 @@
 import { ProblemRow } from './ProblemRow.jsx';
 import styles from './ProblemTable.module.css';
 
-export function ProblemTable({ problems }) {
+export function ProblemTable({ problems, weekId }) {
   return (
     <div className={styles.wrapper}>
       <table className={styles.table}>
@@ -18,7 +18,7 @@ export function ProblemTable({ problems }) {
         </thead>
         <tbody>
           {problems.map((problem) => (
-            <ProblemRow key={problem.id} problem={problem} />
+            <ProblemRow key={problem.id} problem={problem} weekId={weekId} />
           ))}
         </tbody>
       </table>

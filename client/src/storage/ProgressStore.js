@@ -27,6 +27,7 @@
  * @property {boolean} reviewed
  * @property {'none'|'low'|'medium'|'high'} confidence
  * @property {string} notes
+ * @property {Record<'java'|'python'|'cpp', {code: string}>} submissions  last-saved code per language, in the practice editor
  */
 
 /**

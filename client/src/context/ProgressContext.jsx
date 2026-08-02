@@ -109,6 +109,21 @@ export function ProgressProvider({ children }) {
     [applyChange],
   );
 
+  const updateProblemSubmission = useCallback(
+    (problemId, language, code) =>
+      applyChange((current) => {
+        const problem = current.problems[problemId] ?? EMPTY_PROBLEM_PROGRESS;
+        return {
+          ...current,
+          problems: {
+            ...current.problems,
+            [problemId]: { ...problem, submissions: { ...problem.submissions, [language]: { code } } },
+          },
+        };
+      }),
+    [applyChange],
+  );
+
   const updateChapterStepNotes = useCallback(
     (chapterId, stepId, notes) =>
       applyChange((current) => {
@@ -166,6 +181,7 @@ export function ProgressProvider({ children }) {
     saveError,
     isLoading: !progress && !error,
     updateProblem,
+    updateProblemSubmission,
     updateChapterStepNotes,
     updateChapterChecklist,
     updateWeeklyChecklist,

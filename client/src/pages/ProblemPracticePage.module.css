@@ -1,0 +1,44 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.weekLink:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.pattern {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.leetcodeLink {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.leetcodeLink:hover {
+  text-decoration: underline;
+}
