@@ -2,6 +2,7 @@ import { DesignProvider } from '../../context/DesignContext.jsx';
 import { useDesign } from '../../hooks/useDesign.js';
 import { Card } from '../common/Card.jsx';
 import { ErrorMessage, LoadingMessage } from '../common/StatusMessage.jsx';
+import { AIAnalysis } from './AIAnalysis.jsx';
 import { DesignCanvas } from './DesignCanvas.jsx';
 import { DesignNotes } from './DesignNotes.jsx';
 import { DesignSummary } from './DesignSummary.jsx';
@@ -45,6 +46,10 @@ function DesignSectionBody({ chapter }) {
 
       <Card title="Design summary">
         <DesignSummary chapter={chapter} />
+      </Card>
+
+      <Card title="AI critique">
+        <AIAnalysis chapter={chapter} />
       </Card>
     </>
   );

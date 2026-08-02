@@ -12,7 +12,7 @@ import { firebaseConfig, isFirebaseConfigured } from './config.js';
  */
 let app;
 
-function firebaseApp() {
+export function firebaseApp() {
   if (!isFirebaseConfigured) {
     throw new Error('Firebase is not configured. Set the VITE_FIREBASE_* environment variables.');
   }

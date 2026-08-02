@@ -163,10 +163,41 @@ connection carries what it means. That is the difference between a drawing and
 data: `analysis/describeDesign.js` turns the graph into a plain description of
 which components exist, what talks to what, and which boxes were never wired up.
 
-Today that description feeds the summary under the canvas. It is also the shape
-you would serialise into a prompt to have an agent critique a design, which is why
-it is a pure function with no React in it and no knowledge of what happens to its
-output. Adding that means writing a caller, not rewriting the diagram.
+That description feeds the summary under the canvas, and also the "AI critique"
+card below it — the caller that turns the description into a prompt.
+`describeDesign.js` stayed a pure function with no React in it and no knowledge
+of what happens to its output, so adding that caller meant writing `ai/designCritique.js`,
+not rewriting the diagram.
+
+### AI critique (optional)
+
+The "AI critique" card has three buttons, each a separate request:
+
+- **Analyze my design** — asks what the current diagram hasn't addressed yet
+  (scaling, failure handling, consistency, security) and lists follow-up
+  questions. An empty list means nothing obvious is missing.
+- **Get a hint** — one specific nudge, aware of what's already been raised this
+  session so it doesn't repeat itself. Independent of Analyze; use it any time.
+- **Get feedback** — a score plus strengths and weaknesses. This one only ever
+  runs when clicked; it never fires as a side effect of the other two, since a
+  final score should be something you ask for, not something sprung on you.
+
+This only applies to system-design chapters, not the coding problems — there is
+no equivalent for those.
+
+It calls Gemini through **Firebase AI Logic**, not a raw API key: the client SDK
+(`firebase/ai`) proxies the request through the project's own Firebase backend,
+using the `GoogleAIBackend` (the free-tier Gemini Developer API, not the
+metered Vertex AI backend). There is nothing to add to `.env.local` for this —
+it rides on the Firebase config already there. It does need one thing enabled
+once in the Firebase console: **Build → AI Logic → Get started**, choosing the
+**Gemini Developer API** as the backend. The card is only shown to a signed-in
+user, both because the diagram it critiques is per-account already and to keep
+the free-tier quota from being spent by anonymous visitors to the public site.
+
+Analysis, hints, and feedback are session-only — kept in React state, not saved
+to Firestore or localStorage. They reset on reload. That avoids a second storage
+schema for something that would go stale the moment the diagram changes anyway.
 
 Adding a component type is a matter of adding an entry to `COMPONENT_KINDS`; the
 palette, the node rendering, the minimap colors, and the summary all read from
@@ -188,6 +219,10 @@ published to GitHub Pages at `https://<user>.github.io/egrants_interview_prep/`.
    for how to stop doing this by hand.
 6. **Authentication → Settings → Authorized domains** — add
    `<user>.github.io`, or sign-in will be rejected from the deployed site.
+7. **Build → AI Logic → Get started** — choose the **Gemini Developer API**
+   backend. Optional: only needed for the "AI critique" card on system-design
+   chapters (see *AI critique (optional)* above). Skipping this leaves the rest
+   of the app working normally; the card just fails when clicked.
 
 Steps 3 and 6 have to happen in the console. Enabling Google sign-in makes
 Firebase provision an OAuth client for you; driving that through the Identity
