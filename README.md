@@ -80,7 +80,7 @@ src/
 
 `data/` holds static content that never changes at runtime:
 
-- `codingWeeks.json` — the four weeks and their 52 problems
+- `codingWeeks.json` — the four weeks and their 56 problems
 - `designChapters.json` — the ten system design chapters, each tagged with the week it belongs to
 - `designFramework.json` — the nine framework steps and practice checklist, shared by every chapter
 - `checklists.json` — the weekly and final interview checklists

@@ -43,7 +43,26 @@
     "id": "week-3",
     "number": 3,
     "title": "Trees, Heaps & Graphs",
-    "summary": "Tree traversals, BST invariants, heaps, and graph search including topological sort.",
+    "summary": "Tree traversals, BST invariants, heaps, graph search including topological sort, and tries.",
+    "conceptNotes": [
+      {
+        "id": "note-trie",
+        "title": "Tries (prefix trees)",
+        "summary": "A trie is a tree where each edge is labeled with one character, so the path from the root to any node spells out a prefix. Words that share a prefix share that path, which is what makes prefix search and autocomplete fast: you walk one character at a time instead of scanning every string in the set.",
+        "whenToUse": [
+          "Prefix matching — \"every word starting with ...\"",
+          "Autocomplete / typeahead search",
+          "Word search over a fixed dictionary (combine with DFS/backtracking)",
+          "Anywhere a hash set of strings would work, but you also need prefix queries"
+        ],
+        "coreOperations": [
+          "insert(word) — walk from the root, creating a child node per character that doesn't already exist, then mark the last node as end-of-word",
+          "search(word) — walk the same path; return false if any character is missing, otherwise return whether the final node is marked end-of-word",
+          "startsWith(prefix) — same walk as search, but return true as soon as the path exists, regardless of the end-of-word mark"
+        ],
+        "complexity": "Insert and search are O(L) in the length of the word, independent of how many words are stored — that's the whole appeal over a hash set, which is also O(L) per lookup but can't answer prefix queries without scanning every key."
+      }
+    ],
     "problems": [
       { "id": "p-226", "order": 1, "leetcodeId": 226, "title": "Invert Binary Tree", "slug": "invert-binary-tree", "difficulty": "Easy", "pattern": "Tree DFS", "importance": 5, "mustSolve": true },
       { "id": "p-104", "order": 2, "leetcodeId": 104, "title": "Maximum Depth of Binary Tree", "slug": "maximum-depth-of-binary-tree", "difficulty": "Easy", "pattern": "Tree DFS", "importance": 5, "mustSolve": true },
@@ -57,7 +76,11 @@
       { "id": "p-133", "order": 10, "leetcodeId": 133, "title": "Clone Graph", "slug": "clone-graph", "difficulty": "Medium", "pattern": "Graph DFS/BFS", "importance": 5, "mustSolve": true },
       { "id": "p-207", "order": 11, "leetcodeId": 207, "title": "Course Schedule", "slug": "course-schedule", "difficulty": "Medium", "pattern": "Topological Sort", "importance": 5, "mustSolve": true },
       { "id": "p-417", "order": 12, "leetcodeId": 417, "title": "Pacific Atlantic Water Flow", "slug": "pacific-atlantic-water-flow", "difficulty": "Medium", "pattern": "Graph DFS/BFS", "importance": 4, "mustSolve": false },
-      { "id": "p-994", "order": 13, "leetcodeId": 994, "title": "Rotting Oranges", "slug": "rotting-oranges", "difficulty": "Medium", "pattern": "Graph BFS", "importance": 4, "mustSolve": false }
+      { "id": "p-994", "order": 13, "leetcodeId": 994, "title": "Rotting Oranges", "slug": "rotting-oranges", "difficulty": "Medium", "pattern": "Graph BFS", "importance": 4, "mustSolve": false },
+      { "id": "p-208", "order": 14, "leetcodeId": 208, "title": "Implement Trie (Prefix Tree)", "slug": "implement-trie-prefix-tree", "difficulty": "Medium", "pattern": "Trie", "importance": 5, "mustSolve": true },
+      { "id": "p-211", "order": 15, "leetcodeId": 211, "title": "Design Add and Search Words Data Structure", "slug": "design-add-and-search-words-data-structure", "difficulty": "Medium", "pattern": "Trie", "importance": 4, "mustSolve": false },
+      { "id": "p-648", "order": 16, "leetcodeId": 648, "title": "Replace Words", "slug": "replace-words", "difficulty": "Medium", "pattern": "Trie", "importance": 3, "mustSolve": false },
+      { "id": "p-212", "order": 17, "leetcodeId": 212, "title": "Word Search II", "slug": "word-search-ii", "difficulty": "Hard", "pattern": "Trie", "importance": 4, "mustSolve": false }
     ]
   },
   {

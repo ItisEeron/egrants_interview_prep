@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Card } from '../components/common/Card.jsx';
 import { ProgressBar } from '../components/common/ProgressBar.jsx';
 import { ErrorMessage, LoadingMessage } from '../components/common/StatusMessage.jsx';
+import { ConceptNote } from '../components/coding/ConceptNote.jsx';
 import { ProblemTable } from '../components/coding/ProblemTable.jsx';
 import { WeeklyChecklist } from '../components/coding/WeeklyChecklist.jsx';
 import { useWeek } from '../hooks/useCurriculum.js';
@@ -32,6 +33,10 @@ export function WeekPage() {
           </span>
         </div>
       </header>
+
+      {(week.conceptNotes ?? []).map((note) => (
+        <ConceptNote key={note.id} note={note} />
+      ))}
 
       <Card title="Coding problems">
         <ProblemTable problems={week.problems} weekId={week.id} />
