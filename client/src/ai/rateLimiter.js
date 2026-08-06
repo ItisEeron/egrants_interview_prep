@@ -14,12 +14,12 @@
  * Vite but not by the plain `node --test` runner these tests run under.
  */
 /**
- * Set to catch a runaway loop, not to stay under Google's quota — even the
- * most pessimistic published free-tier figure is far above what one person
- * clicking buttons reaches. At roughly 3-6 calls per problem this covers a
- * heavy session (8-15 problems) and still trips long before anything alarming.
+ * Matches Google's free-tier quota exactly: 20 generateContent requests per
+ * day per project per model for gemini-3.6-flash. Raising this above 20 does
+ * not buy more calls — it just lets the app's own counter say "allowed" past
+ * the point where Google starts returning 429s.
  */
-export const DAILY_AI_CALL_LIMIT = 50;
+export const DAILY_AI_CALL_LIMIT = 20;
 
 function todayKey(now) {
   return now.toISOString().slice(0, 10);
